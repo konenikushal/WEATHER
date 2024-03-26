@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import WeatherCard from './WeatherCard'
 
 function App() {
   const [data, setData] = useState({})
@@ -28,20 +29,11 @@ function App() {
           type="text" />
       </div>
       <div className="container">
-        <div className="top">
-          <div className="location">
-            <p>{data.name}</p>
-          </div>
-          <div className="temp">
-            {data.main ? <h1>{data.main.temp.toFixed()}°F</h1> : null}
-          </div>
-          <div className="description">
-            {data.weather ? <p>{data.weather[0].main}</p> : null}
-          </div>
-        </div>
+        <WeatherCard data={data} />
       </div>
     </div>
   );
 }
 
 export default App;
+
