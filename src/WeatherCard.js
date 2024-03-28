@@ -1,14 +1,17 @@
 import React from 'react';
 
+
+
 function WeatherCard({data}) {
-    console.log(data);
+
+    console.log(data)
     return (
         // TODO: Style like Card
         <div className="top">
             {/* TODO Add Favorite Button */}
             {/* TODO: Add State if US */}
             <div className="location">
-                <p>{data.name}, {data.sys.country}</p>
+                {data ? <p>{data.name}</p> : null}
             </div>
             <div className="temp">
                 {data.main ? <h1>{data.main.temp.toFixed()}°F</h1> : null}
