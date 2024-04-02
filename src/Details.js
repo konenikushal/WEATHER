@@ -17,8 +17,8 @@ function Details() {
     return null;
   }
 
+  const apiKey = "BLANK";
   useEffect(() => {
-    const apiKey = "80a9864cb85f531280002acdb2c4d3b4";
     const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
 
@@ -103,7 +103,7 @@ function Details() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <TileLayer
-            url={`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=80a9864cb85f531280002acdb2c4d3b4`}
+            url={`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKey}`}
             attribution='&copy; OpenWeatherMap'
           />
           <SetViewOnClick coords={[latitude, longitude]} />
