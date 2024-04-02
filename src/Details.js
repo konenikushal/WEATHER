@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import citiesData from './data/citiesData.json';
+import WeatherCard from './WeatherCard'
 
 function Details() {
   const { latitude, longitude } = useParams();
@@ -94,22 +96,22 @@ function Details() {
               </div>
           )}
         </div>
+        <div className="map-container" style={{ height: '400px', width: '100%' }}>
+          <MapContainer center={[latitude, longitude]} zoom={6} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <TileLayer
+              url={`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKey}`}
+              attribution='&copy; OpenWeatherMap'
+            />
+            <SetViewOnClick coords={[latitude, longitude]} />
+          </MapContainer>
+        </div>
       </div>
-      <div className="forecast-details-container text-center mb-5">
-          <h2 className="text-2xl font-bold mb-4">Precipitation Map</h2>
-      <div className="map-container" style={{ height: '400px', width: '100%' }}>
-        <MapContainer center={[latitude, longitude]} zoom={6} scrollWheelZoom={false} style={{ height: '100%', width: '100%' }}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <TileLayer
-            url={`https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=${apiKey}`}
-            attribution='&copy; OpenWeatherMap'
-          />
-          <SetViewOnClick coords={[latitude, longitude]} />
-        </MapContainer>
-      </div>
-      </div>
+      {weatherData && (
+        <WeatherCard data={weatherData} addToFavorites={() => {}} isFavorite={false} />
+      )}
     </div>
   );
 }

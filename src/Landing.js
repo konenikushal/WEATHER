@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import citiesData from './data/citiesData.json';
+import axios from 'axios'
+import WeatherCard from './WeatherCard'
 
 function Landing() {
   const [location, setLocation] = useState('');
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
+  const [favorites, setFavorites] = useState([])
+  const defaultLocation = 'Charlotte'
+  const [data, setData] = useState({})
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=BLANK`
+  const defaultUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocation}&units=imperial&appid=BLANK`
+
+  useEffect(() => {
+    if (location === '') {
+      axios.get(defaultUrl).then((response) => {
+        setData(response.data)
+        console.log(response.data)
+      });
+    }
+  }, [location, defaultLocation]);
 
   const locations = citiesData.map(([index, country, city, latitude, longitude]) => ({
     label: `${city}, ${country}`,
@@ -32,6 +49,26 @@ function Landing() {
     navigate(`/details/${selectedOption.latitude}/${selectedOption.longitude}`);
   };
 
+  const addToFavorites = () => {
+    if (favorites.includes(data.name)) {
+      setFavorites(favorites.filter((city) => city !== data.name));
+    } else {
+      setFavorites([...favorites, data.name]);
+    }
+  }
+
+  const isFavorite = favorites.includes(data.name);
+
+  const searchLocation = (event) => {
+    if (event.key === 'Enter') {
+      axios.get(url).then((response) => {
+        setData(response.data)
+        console.log(response.data)
+      })
+      setLocation('')
+    }
+  }
+
   return (
     <div className="app p-4">
       <div className="search my-4 relative">
@@ -55,6 +92,9 @@ function Landing() {
             ))}
           </div>
         )}
+      </div>
+      <div className="container">
+        <WeatherCard data={data} addToFavorites={addToFavorites} isFavorite={isFavorite} />
       </div>
     </div>
   );
