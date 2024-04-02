@@ -1,11 +1,11 @@
 import React from 'react';
+import './WeatherCard.css';
 
 import clear_icon from "./assets/clear.png";
 import cloud_icon from "./assets/cloud.png";
 import drizzle_icon from "./assets/drizzle.png";
 import rain_icon from "./assets/rain.png";
 import snow_icon from "./assets/snow.png";
-
 
 import { useState, useEffect } from "react";
 
@@ -48,27 +48,38 @@ function WeatherCard({data}) {
     console.log(data)
     return (
         // TODO: Style like Card
-        <div className="top">
+        // TODO: Only show Div if data exists
+        <div className="bg-slate-200 rounded-lg shadow-md p-4 w-80">
             {/* TODO Add Favorite Button */}
             {/* TODO: Add State if US */}
             {/* TODO: Add Country  */}
-            <div className="location">
-                {data ? <p>{data.name}</p> : null}
+            <div className="text-4xl text-black font-semibold mb-2">
+                        {data ? <p>{data.name}</p> : null}
             </div>
-            <div className="temp">
-                {data.main ? <h1>{data.main.temp.toFixed()}°F</h1> : null}
+            <div className="flex"> 
+                <div className="w-1/2">
+                    
+                    <div className="flex text-3xl text-black items-center mb-2">
+                        {data.main ? <p>{data.main.temp.toFixed()}°F</p> : null}
+                    </div>
+                    <div className="flex text-base text-black  items-center mb-2">
+                        {data.main ? <p>{data.main.temp_max.toFixed()}°F / {data.main.temp_min.toFixed()}°F</p> : null}
+                    </div>
+                    <div className="text-base text-black  mb-2">
+                        {data.main ? <p>Humidity: {data.main.humidity}%</p> : null}
+                    </div>
+                </div>
+                <div className="w-1/2">
+                    {/* TODO Move on Placement and Icon */}
+                    <div className="mr-2 mb-2 text-3xl text-black">
+                        {data.weather ? <p>{data.weather[0].main}</p> : null}
+                    </div>
+                    <div className="w-14 h-14 mb-2" >
+                        {w_icon ? <img className="object-scale-down" src={w_icon} alt="" /> : null}            
+                    </div>
+                </div>
             </div>
-            <div className="highlow">
-                {data.main ? <p>{data.main.temp_max.toFixed()}°F / {data.main.temp_min.toFixed()}°F</p> : null}
-            </div>
-            <div className="humidity">
-                {data.main ? <p>Humidity: {data.main.humidity}%</p> : null}
-            </div>
-            {/* TODO Move on Placement and Icon */}
-            <div className="description">
-                {data.weather ? <p>{data.weather[0].main}</p> : null}
-                {w_icon ? <img src={w_icon} alt="" /> : null}
-            </div>
+            
         </div>
     );
 }
