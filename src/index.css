@@ -1,3 +1,4 @@
+/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
@@ -15,7 +16,6 @@
   height: 100vh;
   position: relative;
   background-color: rgba(0,0,0,0.4);
-  color: #fff;
 }
 
 .app:before {
@@ -32,6 +32,20 @@
 .app .search {
   text-align: center;
   padding: 1rem;
+  position: relative; /* Ensure relative positioning for absolute children */
+}
+
+.app .search .suggestions {
+  position: absolute;
+  width: calc(100% - 2rem); /* Adjust width based on parent padding */
+  background: #fff; /* Background color for visibility */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Optional: add shadow for depth */
+  z-index: 10; /* Higher than other content */
+  top: 100%; /* Right below the input field */
+  left: 50%;
+  transform: translateX(-50%); /* Center align */
+  border-radius: 8px; /* Match design */
+  overflow: hidden; /* Ensure sharp corners */
 }
 
 .app input {
@@ -41,6 +55,7 @@
   border: 1px solid rgba(255,255,255, 0.8);
   background: rgba(255,255,255, 0.1);
   color: #f8f8f8;
+  width: 100%; /* Ensure it fills its container */
 }
 
 ::placeholder {
@@ -49,7 +64,6 @@
 
 .container {
   max-width: 700px;
-  height: 700px;
   margin: auto;
   padding: 0 1rem;
   position: relative;
@@ -59,26 +73,8 @@
   justify-content: space-between;
 }
 
-.app .top {
-  width: 100%;
-  margin: 1rem auto;
-}
-
-.app .description {
-  position: relative;
-  right: -90%;
-  transform-origin: 0 0;
-}
-
-.app .bottom {
-  display: flex;
-  justify-content: space-evenly;
-  text-align: center;
-  width: 100%;
-  margin: 1rem auto;
-  padding: 1rem;
-  border-radius: 12px;
-  background-color: rgba(255,255,255, 0.2);
+.app .description, .app .top, .app .bottom {
+  z-index: 1; /* Ensure they are below the suggestions */
 }
 
 .bold {
