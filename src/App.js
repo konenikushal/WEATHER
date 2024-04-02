@@ -5,6 +5,7 @@ import WeatherCard from './WeatherCard'
 function App() {
   const [data, setData] = useState({})
   const [location, setLocation] = useState('')
+  const [favorites, setFavorites] = useState([])
   const defaultLocation = 'Charlotte'
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=BLANK`
@@ -18,6 +19,16 @@ function App() {
       });
     }
   }, [location, defaultLocation]);
+
+  const addToFavorites = () => {
+    if (favorites.includes(data.name)) {
+      setFavorites(favorites.filter((city) => city !== data.name));
+    } else {
+      setFavorites([...favorites, data.name]);
+    }
+  }
+
+  const isFavorite = favorites.includes(data.name);
 
   const searchLocation = (event) => {
     if (event.key === 'Enter') {
@@ -40,7 +51,15 @@ function App() {
           type="text" />
       </div>
       <div className="container">
-        <WeatherCard data={data} />
+        <WeatherCard data={data} addToFavorites={addToFavorites} isFavorite={isFavorite} />
+      </div>
+      <div>
+        <h2>Favorites:</h2>
+        <ul>
+          {favorites.map((city, index) => (
+            <li key={index}>{city}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );

@@ -6,11 +6,12 @@ import cloud_icon from "./assets/cloud.png";
 import drizzle_icon from "./assets/drizzle.png";
 import rain_icon from "./assets/rain.png";
 import snow_icon from "./assets/snow.png";
+import Favorite from './Favorite';
 
 import { useState, useEffect } from "react";
 
 
-function WeatherCard({data}) {
+function WeatherCard({ data, addToFavorites, isFavorite }) {
     const[w_icon, setW_icon] = useState(null);
    
     useEffect(() => {
@@ -47,14 +48,16 @@ function WeatherCard({data}) {
 
     console.log(data)
     return (
-        // TODO: Style like Card
-        // TODO: Only show Div if data exists
         <div className="bg-slate-200 rounded-lg shadow-md p-4 w-80">
-            {/* TODO Add Favorite Button */}
             {/* TODO: Add State if US */}
             {/* TODO: Add Country  */}
-            <div className="text-4xl text-black font-semibold mb-2">
+            <div className="flex justify-between">
+                <div className="w-1/2 text-4xl text-black font-semibold mb-2">
                         {data ? <p>{data.name}</p> : null}
+                </div>
+                <div className="w-1/2 text-right mb-2">
+                    <Favorite addToFavorites={addToFavorites} isFavorite={isFavorite}/>
+                </div>
             </div>
             <div className="flex"> 
                 <div className="w-1/2">
@@ -65,12 +68,11 @@ function WeatherCard({data}) {
                     <div className="flex text-base text-black  items-center mb-2">
                         {data.main ? <p>{data.main.temp_max.toFixed()}°F / {data.main.temp_min.toFixed()}°F</p> : null}
                     </div>
-                    <div className="text-base text-black  mb-2">
+                    <div className="text-base text-black mb-2">
                         {data.main ? <p>Humidity: {data.main.humidity}%</p> : null}
                     </div>
                 </div>
                 <div className="w-1/2">
-                    {/* TODO Move on Placement and Icon */}
                     <div className="mr-2 mb-2 text-3xl text-black">
                         {data.weather ? <p>{data.weather[0].main}</p> : null}
                     </div>
