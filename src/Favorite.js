@@ -1,5 +1,6 @@
 import React from 'react';
-// import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbTack } from '@fortawesome/free-solid-svg-icons'
 
 
 function Favorite({ addToFavorites, isFavorite }) {
@@ -8,8 +9,7 @@ function Favorite({ addToFavorites, isFavorite }) {
             <button 
                 className={`py-2 px-4 rounded ${isFavorite ? 'bg-blue-500 hover:bg-blue-700 text-white' : 'bg-transparent border border-blue-500 hover:bg-blue-500 hover:text-white text-blue-500'}`}
                 onClick={addToFavorites}>
-                {/* <FontAwesomeIcon icon="fa-solid fa-thumbtack" /> */}
-                {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+                <FontAwesomeIcon icon={faThumbTack} />
             </button>
         </div>
     );
