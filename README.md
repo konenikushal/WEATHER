@@ -1,3 +1,7 @@
+# Description
+
+Weather Search is a practical weather application that offers users the ability to quickly obtain weather data for major cities around the globe. It serves up essential information such as temperature, humidity, precipitation, and forecasts to assist in planning your day or travel with confidence.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
