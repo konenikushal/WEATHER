@@ -79,3 +79,10 @@
 .bold {
   font-weight: 700;
 }
+
+body {
+  background-image: url('./assets/sand.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
