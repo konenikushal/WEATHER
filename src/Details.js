@@ -68,7 +68,6 @@ function Details() {
       )}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
         {weatherData && (
-          // Add margin to the WeatherCard container for indentation
           <div className="w-full md:w-1/3 mb-4 md:mb-0" style={{ marginLeft: '30px', marginRight: '20px' }}>
             <WeatherCard data={weatherData} addToFavorites={() => {}} isFavorite={false} />
           </div>
