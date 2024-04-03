@@ -2,6 +2,18 @@
 
 Weather Search is a practical weather application that offers users the ability to quickly obtain weather data for major cities around the globe. It serves up essential information such as temperature, humidity, precipitation, and forecasts to assist in planning your day or travel with confidence.
 
+## Setup Instructions
+
+Before running the application, you need to provide your personal API key from OpenWeatherMap in order to fetch weather data. Please follow these steps to configure your API key:
+
+1. Sign up for an API key at [OpenWeatherMap](https://openweathermap.org/api).
+
+2. Locate the `apiKey` constant in both `Details.js` and `Landing.js` files within the project.
+
+3. Replace `BLANK` with your personal API key. The line should look like this:
+   ```javascript
+   const apiKey = "your_api_key_here";
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -18,13 +18,15 @@ function Landing() {
   const [sanFranciscoData, setSanFranciscoData] = useState({});
   const [charlotteData, setCharlotteData] = useState({});
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=BLANK`
-  const defaultUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocation}&units=imperial&appid=BLANK`
+  const apiKey = "BLANK";
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=${apiKey}`
+  const defaultUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocation}&units=imperial&appid=${apiKey}`
 
   useEffect(() => {
-    const charlotteUrl = `https://api.openweathermap.org/data/2.5/weather?q=${charlotte}&units=imperial&appid=BLANK`;
-    const newYorkUrl = `https://api.openweathermap.org/data/2.5/weather?q=${newYork}&units=imperial&appid=BLANK`;
-    const sanFranciscoUrl = `https://api.openweathermap.org/data/2.5/weather?q=${sanFrancisco}&units=imperial&appid=BLANK`;
+    const charlotteUrl = `https://api.openweathermap.org/data/2.5/weather?q=${charlotte}&units=imperial&appid=${apiKey}`;
+    const newYorkUrl = `https://api.openweathermap.org/data/2.5/weather?q=${newYork}&units=imperial&appid=${apiKey}`;
+    const sanFranciscoUrl = `https://api.openweathermap.org/data/2.5/weather?q=${sanFrancisco}&units=imperial&appid=${apiKey}`;
     axios.get(charlotteUrl).then((response) => {
       setCharlotteData(response.data);
     });
