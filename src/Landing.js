@@ -9,20 +9,41 @@ function Landing() {
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
   const [favorites, setFavorites] = useState([])
-  const defaultLocation = 'Charlotte'
+  const charlotte = 'Charlotte'
+  const newYork = 'New York'
+  const sanFrancisco = 'San Francisco'
+  const [defaultLocation, setDefaultLocation] = useState(charlotte)
   const [data, setData] = useState({})
+  const [newYorkData, setNewYorkData] = useState({});
+  const [sanFranciscoData, setSanFranciscoData] = useState({});
+  const [charlotteData, setCharlotteData] = useState({});
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=BLANK`
   const defaultUrl = `https://api.openweathermap.org/data/2.5/weather?q=${defaultLocation}&units=imperial&appid=BLANK`
 
   useEffect(() => {
-    if (location === '') {
-      axios.get(defaultUrl).then((response) => {
-        setData(response.data)
-        console.log(response.data)
-      });
-    }
-  }, [location, defaultLocation]);
+    const charlotteUrl = `https://api.openweathermap.org/data/2.5/weather?q=${charlotte}&units=imperial&appid=BLANK`;
+    const newYorkUrl = `https://api.openweathermap.org/data/2.5/weather?q=${newYork}&units=imperial&appid=BLANK`;
+    const sanFranciscoUrl = `https://api.openweathermap.org/data/2.5/weather?q=${sanFrancisco}&units=imperial&appid=BLANK`;
+    axios.get(charlotteUrl).then((response) => {
+      setCharlotteData(response.data);
+    });
+  
+    axios.get(newYorkUrl).then((response) => {
+      setNewYorkData(response.data);
+    });
+  
+    axios.get(sanFranciscoUrl).then((response) => {
+      setSanFranciscoData(response.data);
+    });
+
+    // if (location === '') {
+    //   axios.get(defaultUrl).then((response) => {
+    //     setData(response.data)
+    //     console.log(response.data)
+    //   });
+    // }
+  }, [location, charlotte, newYork, sanFrancisco, defaultLocation]);
 
   const locations = citiesData.map(([index, country, city, latitude, longitude]) => ({
     label: `${city}, ${country}`,
@@ -97,10 +118,19 @@ function Landing() {
           </div>
         )}
       </div>
-      <div className="container">
-        <WeatherCard data={data} addToFavorites={addToFavorites} isFavorite={isFavorite} />
+      <div className="container grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+        <div className="p-4">
+          <WeatherCard data={charlotteData} addToFavorites={addToFavorites} isFavorite={isFavorite} />
+        </div>
+        <div className="p-4">
+          <WeatherCard data={newYorkData} addToFavorites={addToFavorites} isFavorite={isFavorite} />
+        </div>
+        <div className="p-4">
+          <WeatherCard data={sanFranciscoData} addToFavorites={addToFavorites} isFavorite={isFavorite} />
+        </div>
       </div>
-    </div>
+  </div>
+
   );  
 }
 

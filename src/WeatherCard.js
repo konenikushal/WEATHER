@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 
 function WeatherCard({ data, addToFavorites, isFavorite }) {
     const[w_icon, setW_icon] = useState(null);
-   
+
     useEffect(() => {
         const iconMapping = {
             "01d": clear_icon,
@@ -46,18 +46,16 @@ function WeatherCard({ data, addToFavorites, isFavorite }) {
         }
     }, [data]);
 
-    console.log(data)
     return (
         <div className="bg-slate-200 rounded-lg shadow-md p-4 w-80">
-            {/* TODO: Add State if US */}
-            {/* TODO: Add Country  */}
             <div className="flex justify-between">
-                <div className="w-1/2 text-4xl text-black font-semibold mb-2">
+                <div className="text-4xl text-black font-semibold mb-2">
                         {data ? <p>{data.name}</p> : null}
                 </div>
-                <div className="w-1/2 text-right mb-2">
+                {/* Favorite Functionality
+                <div className="w-1/3 text-right mb-2">
                     <Favorite addToFavorites={addToFavorites} isFavorite={isFavorite}/>
-                </div>
+                </div> */}
             </div>
             <div className="flex"> 
                 <div className="w-1/2">

@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbTack } from '@fortawesome/free-solid-svg-icons'
 
+// Not Currently Used - For Favorite Functionality 
 
 function Favorite({ addToFavorites, isFavorite }) {
     return (
