@@ -71,6 +71,9 @@ function Landing() {
 
   return (
     <div className="app p-4">
+      <div className="title my-4">
+        <h1 className="text-8xl font-bold text-center text-white">WEATHER SEARCH</h1>
+      </div>
       <div className="search my-4 relative">
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -78,6 +81,7 @@ function Landing() {
           onChange={handleLocationChange}
           placeholder="Enter Location"
           type="text"
+          onKeyPress={searchLocation}
         />
         {suggestions.length > 0 && (
           <div className="suggestions absolute bg-white mt-1 p-2 border rounded shadow-lg w-full">
@@ -97,7 +101,7 @@ function Landing() {
         <WeatherCard data={data} addToFavorites={addToFavorites} isFavorite={isFavorite} />
       </div>
     </div>
-  );
+  );  
 }
 
 export default Landing;
